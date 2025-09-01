@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Diario de classe</string>
+    <string name="nome_padrao">Nome do Aluno</string>
+    <string name="turma_padrao">Turma</string>
+</resources>
