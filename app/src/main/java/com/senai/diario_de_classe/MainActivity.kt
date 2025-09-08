@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -30,22 +31,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.senai.diario_de_classe.data.Aluno
 import com.senai.diario_de_classe.data.DataSource
-import com.senai.diario_de_classe.ui.theme.DiarioDeClasseTheme
+import com.senai.diario_de_classe.ui.DiarioDeClasseTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            DiarioDeClasseTheme {
+            DiarioDeClasseTheme (darkTheme = false) {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
@@ -73,7 +73,8 @@ fun CardAluno(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 15.dp, end=15.dp),
+            .padding(start = 15.dp, end = 15.dp)
+            .clip(RoundedCornerShape(bottomStart = 25.dp, topEnd = 25.dp, topStart = 0.dp, bottomEnd = 0.dp)),
     ) {
         Row(
             modifier
@@ -139,6 +140,24 @@ fun ListaDeAlunos(modifier: Modifier = Modifier, listaDeAlunos: List<Aluno>) {
     LazyColumn {
         items(listaDeAlunos) { aluno ->
             CardAluno(modifier, aluno)
+        }
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun DiarioDeClassePreview() {
+    DiarioDeClasseTheme(darkTheme = true) {
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize()
+                .fillMaxWidth()
+        ) { innerPadding ->
+            DiarioDeClasseApp(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxWidth()
+            )
         }
     }
 }
