@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android") version "2.52"
 }
 
 android {
@@ -58,6 +61,28 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     // ... outras dependências
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.8") // Use a versão mais recente!
+    implementation(libs.androidx.ui.text.google.fonts.v168) // Use a versão mais recente!
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+    implementation("androidx.navigation:navigation-compose:2.8.3")
+
+    // Retrofit + Gson
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    // OkHttp para interceptar o token JWT
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Hilt (injeção de dependência opcional)
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-compiler:2.52")
+
+    // Integração Compose ↔ Hilt
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 }
